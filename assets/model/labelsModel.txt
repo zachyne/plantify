@@ -1,0 +1,6 @@
+chalky
+clay 
+loamy
+peaty
+sandy
+silty
