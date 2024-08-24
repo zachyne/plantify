@@ -1,7 +1,3 @@
-// plant_data.dart
-
-import 'package:flutter/material.dart';
-
 class Plant {
   final int id;
   final String imagePath;
@@ -12,6 +8,11 @@ class Plant {
   final String spacing;
   final String notes;
   final List<int> soilIds;
+  
+  // Add these properties if they exist in your data
+  final String? plantWater; // Make these nullable if they're optional
+  final String? plantSpace;
+  final String? plantDep;
 
   Plant({
     required this.id,
@@ -23,6 +24,9 @@ class Plant {
     required this.spacing,
     required this.notes,
     required this.soilIds,
+    this.plantWater, // Initialize these as optional
+    this.plantSpace,
+    this.plantDep,
   });
 
   factory Plant.fromCsv(List<dynamic> csvRow) {
@@ -52,6 +56,10 @@ class Plant {
       spacing: csvRow[6].toString(),
       notes: csvRow[7].toString(),
       soilIds: parseSoilIds(csvRow[8]),
+      // Here you need to assign plantWater, plantSpace, plantDep if you have those columns in your CSV
+      plantWater: csvRow.length > 9 ? csvRow[9]?.toString() : null,
+      plantSpace: csvRow.length > 10 ? csvRow[10]?.toString() : null,
+      plantDep: csvRow.length > 11 ? csvRow[11]?.toString() : null,
     );
   }
 }

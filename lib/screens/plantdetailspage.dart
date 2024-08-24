@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:plantify/data/soil_data.dart';
+import 'package:plantify/screens/homepage.dart';
 import 'soildetailspage.dart';
 
 class PlantDetailsPage extends StatelessWidget {
@@ -42,10 +43,10 @@ class PlantDetailsPage extends StatelessWidget {
               height: 40,
             ),
             Text(
-              "ABOUT $plantNameEng",
+              plantNameEng,
               style: const TextStyle(
                 fontFamily: 'Poppins',
-                fontSize: 18.0,
+                fontSize: 12.0,
                 fontWeight: FontWeight.bold,
                 color: Color(0xFF163020),
               ),
@@ -179,15 +180,19 @@ class PlantDetailsPage extends StatelessWidget {
                 child: Column(
                   children: suitableSoils.map((soil) {
                     return ListTile(
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 0), // Remove default padding
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 0), // Remove default padding
                       title: Center(
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center, // Center the row
+                          mainAxisAlignment:
+                              MainAxisAlignment.center, // Center the row
                           children: <Widget>[
                             CircleAvatar(
                               backgroundImage: AssetImage(soil.imagePath),
                             ),
-                            const SizedBox(width: 10), // Add some space between the avatar and the text
+                            const SizedBox(
+                                width:
+                                    10), // Add some space between the avatar and the text
                             Text(soil.name),
                           ],
                         ),
@@ -196,8 +201,8 @@ class PlantDetailsPage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                SoilDetailsPage(soil: soil), // Pass the soil object
+                            builder: (context) => SoilDetailsPage(
+                                soil: soil), // Pass the soil object
                           ),
                         );
                       },
@@ -207,6 +212,21 @@ class PlantDetailsPage extends StatelessWidget {
               ),
             )
           ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Navigate to the home page
+          Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => const HomePage()),
+            (Route<dynamic> route) => false,
+          );
+        },
+        backgroundColor: const Color(0xFF163020),
+        tooltip: 'Home',
+        child: const Icon(
+          Icons.home,
+          color: Color(0xFFEEF0E5),
         ),
       ),
     );

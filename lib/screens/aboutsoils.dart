@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:plantify/screens/homepage.dart';
 import 'soildetailspage.dart';
 import 'package:plantify/data/soil_data.dart';
 // import 'scan_soil.dart';
 // import 'upload_soil.dart';
-
-
 
 class AboutSoils extends StatelessWidget {
   const AboutSoils({super.key});
@@ -91,6 +90,21 @@ class AboutSoils extends StatelessWidget {
             ),
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Navigate to the home page
+          Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => const HomePage()),
+            (Route<dynamic> route) => false,
+          );
+        },
+        backgroundColor: const Color(0xFF163020),
+        tooltip: 'Home',
+        child: const Icon(
+          Icons.home,
+          color: Color(0xFFEEF0E5),
+        ),
       ),
     );
   }

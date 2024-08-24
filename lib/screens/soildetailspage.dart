@@ -1,9 +1,8 @@
 // lib/screens/soil_details_page.dart
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
-import 'package:csv/csv.dart';
 import 'package:plantify/data/soil_data.dart';
+import 'package:plantify/screens/homepage.dart';
 import 'package:plantify/screens/plantdetailspage.dart';
 import '../data/plant_data.dart';
 import '../data/csv_loader.dart';
@@ -11,7 +10,7 @@ import '../data/csv_loader.dart';
 class SoilDetailsPage extends StatelessWidget {
   final Soil soil;
 
-  const SoilDetailsPage({Key? key, required this.soil}) : super(key: key);
+  const SoilDetailsPage({super.key, required this.soil});
 
   @override
   Widget build(BuildContext context) {
@@ -104,44 +103,64 @@ class SoilDetailsPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  ...plants.map((plant) => ListTile(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 0),
-                    title: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          CircleAvatar(
-                            backgroundImage: AssetImage('assets/plants/${plant.imagePath}'),
-                          ),
-                          const SizedBox(width: 10),
-                          Text(plant.name),
-                        ],
-                      ),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PlantDetailsPage(
-                            plantNameEng: plant.name,
-                            plantNameTag: plant.scientificName,
-                            plantDescription: plant.description,
-                            plantImage: 'assets/plants/${plant.imagePath}',
-                            plantDep: plant.height,
-                            plantSpace: plant.spacing,
-                            plantWater: plant.notes,
-                            suitableSoilIds: plant.soilIds,
-                            soils: soils,
-                          ),
-                        ),
-                      );
-                    },
-                  )).toList(),
+                  ...plants
+                      .map((plant) => ListTile(
+                            contentPadding:
+                                const EdgeInsets.symmetric(horizontal: 0),
+                            title: Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  CircleAvatar(
+                                    backgroundImage: AssetImage(
+                                        'assets/plants/${plant.imagePath}'),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  Text(plant.name),
+                                ],
+                              ),
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PlantDetailsPage(
+                                    plantNameEng: plant.name,
+                                    plantNameTag: plant.scientificName,
+                                    plantDescription: plant.description,
+                                    plantImage:
+                                        'assets/plants/${plant.imagePath}',
+                                    plantDep: plant.height,
+                                    plantSpace: plant.spacing,
+                                    plantWater: plant.notes,
+                                    suitableSoilIds: plant.soilIds,
+                                    soils: soils,
+                                  ),
+                                ),
+                              );
+                            },
+                          ))
+                      .toList(),
                 ],
               ),
             );
           }
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Navigate to the home page
+          Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => const HomePage()),
+            (Route<dynamic> route) => false,
+          );
+        },
+        backgroundColor: const Color(0xFF163020),
+        tooltip: 'Home',
+        child: const Icon(
+          Icons.home,
+          color: Color(0xFFEEF0E5),
+        ),
       ),
     );
   }

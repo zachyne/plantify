@@ -3,17 +3,11 @@ import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:plantify/data/soil_data.dart';
+import 'package:plantify/screens/homepage.dart';
 import 'plantdetailspage.dart';
 
-// import 'aboutsoils.dart';
-// import 'aboutplants.dart';
-// import 'scansoil.dart';
-// import 'uploadsoil.dart';
-// import 'scan_soil.dart';
-// import 'upload_soil.dart';
-
 class AboutPlants extends StatefulWidget {
-  const AboutPlants({Key? key}) : super(key: key);
+  const AboutPlants({super.key});
 
   @override
   _AboutPlants createState() => _AboutPlants();
@@ -134,6 +128,21 @@ class _AboutPlants extends State<AboutPlants> {
             ),
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Navigate to the home page
+          Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => const HomePage()),
+            (Route<dynamic> route) => false,
+          );
+        },
+        backgroundColor: const Color(0xFF163020),
+        tooltip: 'Home',
+        child: const Icon(
+          Icons.home,
+          color: Color(0xFFEEF0E5),
+        ),
       ),
     );
   }

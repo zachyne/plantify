@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:plantify/features/scan_soil.dart';
 import 'aboutsoils.dart';
 import 'aboutplants.dart';
-import 'scansoil.dart';
-import 'uploadsoil.dart';
-// import 'scan_soil.dart';
-// import 'upload_soil.dart';
-
+import 'package:plantify/features/upload_soil.dart';
 
 
 class HomePage extends StatelessWidget {
@@ -16,7 +13,8 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween, // Align items to the edges
+          mainAxisAlignment:
+              MainAxisAlignment.spaceBetween, // Align items to the edges
           children: [
             Image.asset(
               'assets/logos/plain_logo.png',
@@ -35,16 +33,15 @@ class HomePage extends StatelessWidget {
         ),
         backgroundColor: const Color(0xFFEEF0E5),
       ),
-      body: Center( 
+      body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center, 
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            
             const Text(
               'What do you want to do?',
               style: TextStyle(
                 fontFamily: 'Poppins',
-                fontSize: 24.0,
+                fontSize: 20.0,
                 color: Color(0xFF163020),
                 fontWeight: FontWeight.bold,
               ),
@@ -54,66 +51,72 @@ class HomePage extends StatelessWidget {
 
             // Elevated Buttons
 
-             SizedBox(
+            SizedBox(
               width: 150, // Set a fixed width (adjust as needed)
               child: ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: WidgetStateProperty.all<Color>(
-                  const Color(0xFF163020), // Background color
-                ),
-                textStyle: WidgetStateProperty.all<TextStyle>(
-                  const TextStyle(
-                    fontWeight: FontWeight.w600, // Semi-bold (w600 is equivalent) 
-                    fontSize: 18.0, // Optional: Set font size
+                style: ButtonStyle(
+                  backgroundColor: WidgetStateProperty.all<Color>(
+                    const Color(0xFF163020), // Background color
+                  ),
+                  textStyle: WidgetStateProperty.all<TextStyle>(
+                    const TextStyle(
+                      fontWeight:
+                          FontWeight.w600, // Semi-bold (w600 is equivalent)
+                      fontSize: 18.0, // Optional: Set font size
+                    ),
                   ),
                 ),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const ScanSoil()),
-                );
-              },
-              child: const Text('Scan Soil',
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ScanSoil()),
+                  );
+                },
+                child: const Text(
+                  'Scan Soil',
                   style: TextStyle(
                     color: Color(0xFFEEF0E5),
                     fontWeight: FontWeight.bold,
                     fontSize: 15.0,
-                  ),),
-             ),
+                  ),
+                ),
+              ),
             ),
 
             const SizedBox(height: 5),
 
-             SizedBox(
+            SizedBox(
               width: 150, // Set a fixed width (adjust as needed)
               child: ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: WidgetStateProperty.all<Color>(
-                  const Color(0xFF163020), // Background color
-                ),
-                textStyle: WidgetStateProperty.all<TextStyle>(
-                  const TextStyle(
-                    fontWeight: FontWeight.w600, // Semi-bold (w600 is equivalent) 
-                    fontSize: 18.0, // Optional: Set font size
+                style: ButtonStyle(
+                  backgroundColor: WidgetStateProperty.all<Color>(
+                    const Color(0xFF163020), // Background color
+                  ),
+                  textStyle: WidgetStateProperty.all<TextStyle>(
+                    const TextStyle(
+                      fontWeight:
+                          FontWeight.w600, // Semi-bold (w600 is equivalent)
+                      fontSize: 18.0, // Optional: Set font size
+                    ),
                   ),
                 ),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const UploadSoil()),
-                );
-              },
-              child: const Text('Upload Soil',
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const UploadSoil()),
+                  );
+                },
+                child: const Text(
+                  'Upload Soil',
                   style: TextStyle(
                     color: Color(0xFFEEF0E5),
                     fontWeight: FontWeight.bold,
                     fontSize: 15.0,
-                  ),),
-             ),
+                  ),
+                ),
+              ),
             ),
-  
+
             const SizedBox(height: 15),
 
             const Text(
@@ -129,64 +132,71 @@ class HomePage extends StatelessWidget {
             SizedBox(
               width: 150, // Set a fixed width (adjust as needed)
               child: ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: WidgetStateProperty.all<Color>(
-                  const Color(0xFF163020), // Background color
-                ),
-                textStyle: WidgetStateProperty.all<TextStyle>(
-                  const TextStyle(
-                    fontWeight: FontWeight.w600, // Semi-bold (w600 is equivalent) 
-                    fontSize: 18.0, // Optional: Set font size
+                style: ButtonStyle(
+                  backgroundColor: WidgetStateProperty.all<Color>(
+                    const Color(0xFF163020), // Background color
+                  ),
+                  textStyle: WidgetStateProperty.all<TextStyle>(
+                    const TextStyle(
+                      fontWeight:
+                          FontWeight.w600, // Semi-bold (w600 is equivalent)
+                      fontSize: 18.0, // Optional: Set font size
+                    ),
                   ),
                 ),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const AboutSoils()),
-                );
-              },
-              child: const Text('About Soil',
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const AboutSoils()),
+                  );
+                },
+                child: const Text(
+                  'About Soil',
                   style: TextStyle(
                     color: Color(0xFFEEF0E5),
                     fontWeight: FontWeight.bold,
                     fontSize: 15.0,
-                  ),),
-             ),
+                  ),
+                ),
+              ),
             ),
 
             const SizedBox(height: 5),
 
-             SizedBox(
+            SizedBox(
               width: 150, // Set a fixed width (adjust as needed)
               child: ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: WidgetStateProperty.all<Color>(
-                  const Color(0xFF163020), // Background color
-                ),
-                textStyle: WidgetStateProperty.all<TextStyle>(
-                  const TextStyle(
-                    fontWeight: FontWeight.w600, // Semi-bold (w600 is equivalent) 
-                    fontSize: 18.0, // Optional: Set font size
+                style: ButtonStyle(
+                  backgroundColor: WidgetStateProperty.all<Color>(
+                    const Color(0xFF163020), // Background color
+                  ),
+                  textStyle: WidgetStateProperty.all<TextStyle>(
+                    const TextStyle(
+                      fontWeight:
+                          FontWeight.w600, // Semi-bold (w600 is equivalent)
+                      fontSize: 18.0, // Optional: Set font size
+                    ),
                   ),
                 ),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const AboutPlants()),
-                );
-              },
-              child: const Text('About Plants',
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AboutPlants()),
+                  );
+                },
+                child: const Text(
+                  'About Plants',
                   style: TextStyle(
                     color: Color(0xFFEEF0E5),
                     fontWeight: FontWeight.bold,
                     fontSize: 15.0,
-                  ),),
-             ),
-            ),
+                  ),
+                ),
 
-            
+                
+              ),
+            ),
           ],
         ),
       ),

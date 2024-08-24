@@ -31,15 +31,13 @@ dependencies:
   flutter:
     sdk: flutter
   csv: ^6.0.0
-  tflite_v2: ^1.0.0
-  camera: ^0.10.5+5
-  gallery_saver: ^2.3.2
-  image_picker: ^1.0.4
-  image: ^4.1.3
+  image_picker: ^0.8.9
+  shared_preferences: ^2.0.9
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
+  flutter_tflite: ^1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +67,11 @@ flutter:
     - assets/plants_data.csv
     - assets/plants/
     - assets/model/model.tflite
+    - assets/model/labelsModel.txt
+    - assets/model/soil_or_not_model.tflite
+    - assets/model/soiltype_final_model_app.tflite
+    - assets/model/soilOrNot.txt
+    - assets/upload.jpg
   
   fonts:
     - family: Poppins

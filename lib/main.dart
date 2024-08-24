@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:plantify/screens/startpage.dart';
+import 'package:plantify/screens/homepage.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool isFirstTimeUser = prefs.getBool('first_time_user') ?? true;
+
+  runApp(MyApp(isFirstTimeUser: isFirstTimeUser));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool isFirstTimeUser;
+
+  const MyApp({super.key, required this.isFirstTimeUser});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +25,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color(0xFFEEF0E5),
         fontFamily: 'Poppins',
       ),
-      home: const StartPage(), 
+      home: isFirstTimeUser ? const StartPage() : const HomePage(),
     );
   }
 }
