@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:plantify/components/appbar.dart';
 import 'dart:developer' as devtools;
 
 import 'package:plantify/features/result_page.dart';
@@ -76,7 +77,7 @@ class _UploadSoilState extends State<UploadSoil> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => NotSoil(),
+          builder: (context) => const NotSoil(),
         ),
       );
     }
@@ -110,27 +111,7 @@ class _UploadSoilState extends State<UploadSoil> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Image.asset(
-              'assets/logos/plain_logo.png',
-              height: 40,
-            ),
-            const Text(
-              'Plantify',
-              style: TextStyle(
-                fontFamily: 'Poppins',
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF163020),
-              ),
-            ),
-          ],
-        ),
-        backgroundColor: const Color(0xFFEEF0E5),
-      ),
+      appBar: const PlantifyAppBar(title: 'Upload Soil'),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -143,6 +124,7 @@ class _UploadSoilState extends State<UploadSoil> {
                 fontWeight: FontWeight.bold,
                 color: Color(0xFF163020),
               ),
+              textAlign: TextAlign.center,
             ),
             const SizedBox(height: 30),
             Container(
@@ -175,13 +157,16 @@ class _UploadSoilState extends State<UploadSoil> {
                 ),
                 foregroundColor: Colors.black,
               ),
-              child: const Text(
-                "Upload Soil",
-                style: TextStyle(
-                  fontFamily: 'Poppins',
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFFEEF0E5),
+              child: const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  "Upload Soil",
+                  style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFFEEF0E5),
+                  ),
                 ),
               ),
             ),

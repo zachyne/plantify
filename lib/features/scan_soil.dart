@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:plantify/components/appbar.dart';
 import 'dart:developer' as devtools;
 
 import 'package:plantify/features/result_page.dart';
@@ -76,7 +77,7 @@ class _ScanSoilState extends State<ScanSoil> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => NotSoil(),
+          builder: (context) => const NotSoil(),
         ),
       );
     }
@@ -110,27 +111,7 @@ class _ScanSoilState extends State<ScanSoil> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Image.asset(
-              'assets/logos/plain_logo.png',
-              height: 40,
-            ),
-            const Text(
-              'Plantify',
-              style: TextStyle(
-                fontFamily: 'Poppins',
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF163020),
-              ),
-            ),
-          ],
-        ),
-        backgroundColor: const Color(0xFFEEF0E5),
-      ),
+      appBar: const PlantifyAppBar(title: 'Scan Soil'),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -171,7 +152,7 @@ class _ScanSoilState extends State<ScanSoil> {
               ),
               child: const Center(
                 child: Icon(
-                  Icons.upload_rounded,
+                  Icons.camera_alt,
                   size: 80,
                   color: Color(0xFF163020),
                 ),

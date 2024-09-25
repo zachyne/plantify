@@ -7,7 +7,7 @@ class StartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
+      body: Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -22,7 +22,7 @@ class StartPage extends StatelessWidget {
             ),
           ),
           const Text(
-            'Grow Smarter, Plant Better',
+            'Know your soil, Know your plants',
             style: TextStyle(
               fontFamily: 'Poppins',
               fontSize: 15.0,
@@ -36,7 +36,12 @@ class StartPage extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const HomePage()),
+                PageRouteBuilder(
+                  pageBuilder: (context, animation, secondaryAnimation) =>
+                      const HomePage(),
+                  transitionDuration:
+                      const Duration(seconds: 0), // Instant transition
+                ),
               );
             },
             style: ButtonStyle(

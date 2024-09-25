@@ -64,14 +64,18 @@ flutter:
   assets:
     - assets/logos/
     - assets/soil/
+    - assets/aboutus/
     - assets/plants_data.csv
+    - assets/final_plant_data.csv
     - assets/plants/
+    - assets/plants-no-bg/
     - assets/model/model.tflite
     - assets/model/labelsModel.txt
     - assets/model/soil_or_not_model.tflite
     - assets/model/soiltype_final_model_app.tflite
     - assets/model/soilOrNot.txt
     - assets/upload.jpg
+    - assets/leaves_background.png
   
   fonts:
     - family: Poppins

@@ -1,7 +1,7 @@
-// import 'package:csv/csv.dart';
 import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:plantify/components/appbar.dart';
 import 'package:plantify/data/soil_data.dart';
 import 'package:plantify/screens/homepage.dart';
 import 'plantdetailspage.dart';
@@ -23,7 +23,7 @@ class _AboutPlants extends State<AboutPlants> {
   }
 
   void _loadCSV() async {
-    final rawData = await rootBundle.loadString('assets/plants_data.csv');
+    final rawData = await rootBundle.loadString('assets/final_plant_data.csv');
     List<List<dynamic>> listData = const CsvToListConverter().convert(rawData);
     setState(() {
       _data = listData;
@@ -33,27 +33,7 @@ class _AboutPlants extends State<AboutPlants> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Image.asset(
-              'assets/logos/plain_logo.png',
-              height: 40,
-            ),
-            const Text(
-              'About Plants',
-              style: TextStyle(
-                fontFamily: 'Poppins',
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF163020),
-              ),
-            ),
-          ],
-        ),
-        backgroundColor: const Color(0xFFEEF0E5),
-      ),
+      appBar: const PlantifyAppBar(title: 'About Plants'),
       body: ListView.builder(
         itemCount: _data.length,
         itemBuilder: (context, index) {
@@ -70,44 +50,49 @@ class _AboutPlants extends State<AboutPlants> {
           return ListTile(
             contentPadding:
                 const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-            leading: CircleAvatar(
-              backgroundImage: AssetImage('assets/plants/$plantImage'),
-              radius: 40, 
+            leading: Image.asset(
+              'assets/plants-no-bg/$plantImage',
+              height: 100,
             ),
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
                   child: Text(
-                    _data[index][2]
+                    _data[index][3]
                         .toString(), // Assuming plant name is at index 2
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 18,
+                      fontSize: 24,
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => PlantDetailsPage(
+                    Navigator.of(context).push(
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation, secondaryAnimation) =>
+                            PlantDetailsPage(
                           plantNameEng: plantNameEng,
                           plantNameTag: plantNameTag,
                           plantDescription:
                               plantDescription, // Pass description for details
                           plantImage:
-                              'assets/plants/$plantImage', // Pass image for details
+                              'assets/plants-no-bg/$plantImage', // Pass image for details
                           plantDep: plantDep,
                           plantSpace: plantSpace,
                           plantWater: plantWater,
-                          suitableSoilIds: _data[index][8] is String 
-                            ? (_data[index][8] as String).split(',').map((e) => int.parse(e)).toList() 
-                            : [_data[index][8] as int],
+                          suitableSoilIds: _data[index][8] is String
+                              ? (_data[index][8] as String)
+                                  .split(',')
+                                  .map((e) => int.parse(e))
+                                  .toList()
+                              : [_data[index][8] as int],
                           soils: soils, // Pass your soils list
                         ),
+                        transitionDuration:
+                            const Duration(seconds: 0), // Instant transition
                       ),
                     );
                   },
@@ -125,6 +110,9 @@ class _AboutPlants extends State<AboutPlants> {
               _data[index][4].toString(), // Assuming description is at index 4
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                fontSize: 18,
+              ),
             ),
           );
         },
@@ -133,7 +121,12 @@ class _AboutPlants extends State<AboutPlants> {
         onPressed: () {
           // Navigate to the home page
           Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => const HomePage()),
+            PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) =>
+                  const HomePage(),
+              transitionDuration:
+                  const Duration(seconds: 0), // Instant transition
+            ),
             (Route<dynamic> route) => false,
           );
         },

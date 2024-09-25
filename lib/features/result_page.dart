@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:plantify/components/appbar.dart';
 import 'package:plantify/data/plant_data.dart';
 import 'package:plantify/data/soil_data.dart';
 import 'package:plantify/screens/homepage.dart';
@@ -42,27 +43,7 @@ class ResultPage extends StatelessWidget {
             amendments: ''));
 
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Image.asset(
-              'assets/logos/plain_logo.png',
-              height: 40,
-            ),
-            const Text(
-              'Results',
-              style: TextStyle(
-                fontFamily: 'Poppins',
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF163020),
-              ),
-            ),
-          ],
-        ),
-        backgroundColor: const Color(0xFFEEF0E5),
-      ),
+      appBar: const PlantifyAppBar(title: 'Result Page'),
       body: FutureBuilder<List<Plant>>(
         future: loadPlantsData(),
         builder: (context, snapshot) {
@@ -86,8 +67,8 @@ class ResultPage extends StatelessWidget {
                         padding: const EdgeInsets.all(16.0),
                         child: Image.file(
                           imageFile,
-                          width: 100,
-                          height: 100,
+                          width: 130,
+                          height: 130,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -99,7 +80,7 @@ class ResultPage extends StatelessWidget {
                             Text(
                               label,
                               style: const TextStyle(
-                                fontSize: 24,
+                                fontSize: 28,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black,
                               ),
@@ -108,7 +89,7 @@ class ResultPage extends StatelessWidget {
                             Text(
                               '${confidence.toStringAsFixed(2)}%',
                               style: const TextStyle(
-                                fontSize: 12,
+                                fontSize: 20,
                                 color: Colors.black,
                               ),
                               textAlign: TextAlign.left,
@@ -125,7 +106,30 @@ class ResultPage extends StatelessWidget {
                       soil?.description ?? 'No description available.',
                       textAlign: TextAlign.justify,
                       style: const TextStyle(
-                        fontSize: 14,
+                        fontSize: 20,
+                        height: 1.0,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Center(
+                    child: Text(
+                      "Amendments for $label",
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      soil?.amendments ?? 'No amendments available.',
+                      textAlign: TextAlign.justify,
+                      style: const TextStyle(
+                        fontSize: 20,
                         height: 1.0,
                       ),
                     ),
@@ -135,7 +139,7 @@ class ResultPage extends StatelessWidget {
                     child: Text(
                       "Suitable Crops / Plants for $label",
                       style: const TextStyle(
-                        fontSize: 18,
+                        fontSize: 24,
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       ),
@@ -145,22 +149,30 @@ class ResultPage extends StatelessWidget {
                   const SizedBox(height: 12),
                   ...plants.map((plant) {
                     return ListTile(
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 16),
-                      leading: CircleAvatar(
-                        backgroundImage:
-                            AssetImage('assets/plants/${plant.imagePath}'),
-                        radius: 40,
+                      contentPadding: const EdgeInsets.fromLTRB(2, 2, 2, 2),
+                      leading: Container(
+                        width: 70, // Set width for square shape
+                        height: 70, // Set height equal to width
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                                'assets/plants-no-bg/${plant.imagePath}'),
+                            fit: BoxFit
+                                .cover, // Ensure the image covers the entire container
+                          ),
+                          borderRadius: BorderRadius.circular(
+                              8), // Optional: rounded corners
+                        ),
                       ),
                       title: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
                             child: Text(
-                              plant.name,
+                              plant.scientificName,
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 18,
+                                fontSize: 20,
                               ),
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -175,7 +187,7 @@ class ResultPage extends StatelessWidget {
                                     plantNameTag: plant.scientificName,
                                     plantDescription: plant.description,
                                     plantImage:
-                                        'assets/plants/${plant.imagePath}',
+                                        'assets/plants-no-bg/${plant.imagePath}',
                                     plantDep: plant.height,
                                     plantSpace: plant.spacing,
                                     plantWater: plant.notes,
@@ -188,8 +200,10 @@ class ResultPage extends StatelessWidget {
                             child: const Text(
                               'view details',
                               style: TextStyle(
-                                color: Colors.green,
+                                color: Color(0xFF163020),
                                 decoration: TextDecoration.underline,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
                               ),
                             ),
                           ),
@@ -199,6 +213,9 @@ class ResultPage extends StatelessWidget {
                         plant.description,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontSize: 18,
+                        ),
                       ),
                     );
                   }).toList(),

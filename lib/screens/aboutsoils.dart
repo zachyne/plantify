@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plantify/components/appbar.dart';
 import 'package:plantify/screens/homepage.dart';
 import 'soildetailspage.dart';
 import 'package:plantify/data/soil_data.dart';
@@ -11,28 +12,7 @@ class AboutSoils extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          mainAxisAlignment:
-              MainAxisAlignment.spaceBetween, // Align items to the edges
-          children: [
-            Image.asset(
-              'assets/logos/plain_logo.png',
-              height: 40, // Adjust logo size as needed
-            ),
-            const Text(
-              'About Soils',
-              style: TextStyle(
-                fontFamily: 'Poppins',
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF163020),
-              ),
-            ),
-          ],
-        ),
-        backgroundColor: const Color(0xFFEEF0E5),
-      ),
+      appBar: const PlantifyAppBar(title: 'About Soils'),
       body: ListView.builder(
         itemCount: soils.length,
         itemBuilder: (context, index) {
@@ -58,7 +38,7 @@ class AboutSoils extends StatelessWidget {
                     soils[index].name,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 18,
+                      fontSize: 24,
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -67,9 +47,11 @@ class AboutSoils extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) =>
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation, secondaryAnimation) =>
                             SoilDetailsPage(soil: soils[index]),
+                        transitionDuration:
+                            const Duration(seconds: 0), // Instant transition
                       ),
                     );
                   },
@@ -87,6 +69,9 @@ class AboutSoils extends StatelessWidget {
               soils[index].description,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                fontSize: 18,
+              ),
             ),
           );
         },
@@ -95,7 +80,12 @@ class AboutSoils extends StatelessWidget {
         onPressed: () {
           // Navigate to the home page
           Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => const HomePage()),
+            PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) =>
+                  const HomePage(),
+              transitionDuration:
+                  const Duration(seconds: 0), // Instant transition
+            ),
             (Route<dynamic> route) => false,
           );
         },
